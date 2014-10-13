@@ -1,8 +1,10 @@
+/*Manipulating margin and padding to fill the whole screen*/
 body {
     margin: 0;
     padding: 0;
 }
 
+/*Creating a game screen as a block figure.*/
 #game-screen {
     display: block;
 }
