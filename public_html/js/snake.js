@@ -92,6 +92,15 @@ function snakeUpdate() {
     else if(snakeDirection == "right"){
         snakeHeadX++;
     }
+    else if(snakeDirection == "up"){
+        snakeHeadY--;
+    }
+    else if(snakeDirection == "left"){
+        snakeHeadX--;
+    }
+    
+    checkFoodCollisions (snakeHeadX, snakeHeadY);
+    checkWallCollisions (snakeHeadX, snakeHeadY);
     
     var snakeTail = snake.pop();
     snakeTail.x = snakeHeadX;
@@ -133,10 +142,38 @@ function setFoodPosition() {
 function keyboardHandler (event) {
     console.log(event);
     
-    if(event.keyCode == "39") {
+    if(event.keyCode == "39" && snakeDirection != "left") {
         snakeDirection = "right"
     }
-    else if(event.keyCode == "40") {
+    else if(event.keyCode == "40" && snakeDirection != "up") {
         snakeDirection = "down"
+    }
+    else if(event.keyCode == "38" && snakeDirection != "down") {
+        snakeDirection = "up"   
+    }
+    else if(event.keyCode == "37" && snakeDirection != "right") {
+        snakeDirection = "left"   
+    }
+}
+
+/* ----------------------------------------------------------------------------
+ * Collision Handling
+ * ----------------------------------------------------------------------------
+ */
+
+function checkFoodCollisions(snakeHeadX, snakeHeadY) {
+    if(snakeHeadX == food.x && snakeHeadY == food.y) {
+        snake.push({
+            x: 0,
+            y: 0
+        });
+        snakeLength++;
+        setFoodPosition();
+    }
+}
+
+function checkWallCollisions(snakeHeadX, snakeHeadY) {
+    if(snakeHeadX * snakeSize >= screenWidth || snakeHeadX * snakeSize < 0) {
+        console.log(WallCollisions);
     }
 }
