@@ -14,6 +14,9 @@ var context;
 var screenWidth;
 var screenHeight;
 
+var gameState;
+var gameOverMenu;
+
 /* ---------------------------------------------------------------------------
  * Executing Game Code
  * ---------------------------------------------------------------------------
@@ -40,17 +43,23 @@ function gameInitialize() {
     canvas.height = screenHeight;
     
     document.addEventListener("keydown", keyboardHandler);
+    
+    gameOverMenu = document.getElementById("gameOver");
+    
+    setState("PLAY");
 }
 
 function gameLoop() {
     gameDraw();
-    snakeUpdate();
-    snakeDraw();
-    foodDraw();
+    if (gameState == "PLAY"){
+        snakeUpdate();
+        snakeDraw();
+        foodDraw();
+    }
 }
 
 function gameDraw() {
-    context.fillStyle = "black";
+    context.fillStyle = "blue";
     context.fillRect(0, 0, screenWidth, screenHeight);
     
     snakeDraw();
@@ -63,7 +72,7 @@ function gameDraw() {
 
 function snakeInitialize() {
     snake = [];
-    snakeLength = 5;
+    snakeLength = 1;
     snakeSize = 20;
     snakeDirection = "down";
     
@@ -140,8 +149,6 @@ function setFoodPosition() {
  * ----------------------------------------------------------------------------
  */
 function keyboardHandler (event) {
-    console.log(event);
-    
     if(event.keyCode == "39" && snakeDirection != "left") {
         snakeDirection = "right"
     }
@@ -174,7 +181,27 @@ function checkFoodCollisions(snakeHeadX, snakeHeadY) {
 
 function checkWallCollisions(snakeHeadX, snakeHeadY) {
     if(snakeHeadX * snakeSize >= screenWidth || snakeHeadX * snakeSize < 0) {
-        console.log(WallCollisions);
+        setState("GAME OVER");  
     }
     
+}
+
+/* ----------------------------------------------------------------------------
+ * Game State Handling
+ * ----------------------------------------------------------------------------
+ */
+
+function setState(state) {
+    gameState = state;
+    showMenu(state);
+}
+
+function displayMenu(menu) {
+    menu.style.visibility = "visible";
+}
+
+function showMenu(state) {
+    if(state == "GAME OVER") {
+        displayMenu(gameOverMenu);
+    }
 }
