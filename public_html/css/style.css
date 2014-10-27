@@ -1,5 +1,6 @@
 /*Manipulating margin and padding to fill the whole screen*/
 body {
+    background-color: blue; 
     margin: 0;
     padding: 0;
 }
@@ -9,12 +10,12 @@ body {
     display: block;
 }
 
-#gameOver {
+#gameOver,#playHUD {
     position: absolute;
     visibility: hidden;
 }
 
-h1,h3 {
+h1,h2,h3,h4,h5 {
     font-family: 'Permanent Marker', cursive;
     color: white;
     text-align: center;
@@ -23,6 +24,7 @@ h1,h3 {
 .title {
     font-size: 62px;
     margin-bottom: 0px;
+    margin-top: 0px;
 }
 
 #restartButton {
@@ -30,6 +32,10 @@ h1,h3 {
     border-radius: 10px;
 }
 
-#restartButton:hover {
+#restartButton,#difficulty:hover {
     background-color: #009900;
+}
+
+#scoreboard {
+    margin: 0px;
 }
