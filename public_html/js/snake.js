@@ -3,6 +3,14 @@
  * ---------------------------------------------------------------------------
  */
 
+//Preloading audio stuff
+var mainMusic = document.getElementById("main_music"),
+		foodMusic = document.getElementById("food"), 
+		goMusic = document.getElementById("gameOver");
+
+var files = [mainMusic, foodMusic, goMusic];
+var counter = 0;
+
 var snake;
 var snakeLength;
 var snakeSize;
@@ -37,6 +45,9 @@ setInterval(gameLoop, 1000/30);
  */
 
 function gameInitialize() {
+    
+    mainMusic.play();
+    
     var canvas = document.getElementById("game-screen");
     context = canvas.getContext("2d");
     
@@ -47,6 +58,9 @@ function gameInitialize() {
     canvas.height = screenHeight;
     
     document.addEventListener("keydown", keyboardHandler);
+    
+    startScreen = document.getElementById("startScreen");
+    centerMenuPosition(startScreen);
     
     difficulty = document.getElementById("difficulty");
     difficulty.addEventListener("click", gameStart);
@@ -90,8 +104,9 @@ function gameRestart() {
 function gameStart() {
     snakeInitialize();
     foodInitialize();
-    setState("PLAY");
     hideMenu(startScreen);
+    setState("PLAY");
+    
 }
 
 /* --------------------------------------------------------------------------
@@ -206,15 +221,19 @@ function checkFoodCollisions(snakeHeadX, snakeHeadY) {
         });
         snakeLength++;
         setFoodPosition();
+        foodMusic.pause();
+        foodMusic.currentTime = 0;
+        foodMusic.play();
+			
     }
 }
 
 function checkWallCollisions(snakeHeadX, snakeHeadY) {
-    if(snakeHeadX * snakeSize >= screenWidth || snakeHeadX * snakeSize < 0 || snakeHeadY * snakeSize >= screenHeight) {
-        setState("GAME OVER");  
-        
+    if(snakeHeadX * snakeSize >= screenWidth || snakeHeadX * snakeSize < 0 ||
+       snakeHeadY * snakeSize >= screenHeight || snakeHeadY * snakeSize) {
+        setState("GAME OVER");     
     }
-}
+    }
 
 function checkSnakeCollisions(snakeHeadX, snakeHeadY) {
     for(var index = 1; index < snake.length; index++) {
