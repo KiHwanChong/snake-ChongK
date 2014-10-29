@@ -10,6 +10,7 @@ body {
     display: block;
 }
 
+/*Hide the menu and make it abosoulte to fit in the whole screen */
 #gameOver,#playHUD {
     position: absolute;
     visibility: hidden;
@@ -19,7 +20,7 @@ body {
     position: absolute;
 }
 
-h1,h2,h3,h4,h5 {
+h1,h2,h3,h4,h5,h6 {
     font-family: 'Permanent Marker', cursive;
     color: white;
     text-align: center;
@@ -31,12 +32,12 @@ h1,h2,h3,h4,h5 {
     margin-top: 0px;
 }
 
-#restartButton {
+#restartButton,#easy,#hard {
     border: 2px solid white;
     border-radius: 10px;
 }
 
-#restartButton,#difficulty:hover {
+#restartButton:hover,#easy:hover,#hard:hover {
     background-color: #009900;
 }
 

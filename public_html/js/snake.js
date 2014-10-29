@@ -5,8 +5,8 @@
 
 //Preloading audio stuff
 var mainMusic = document.getElementById("main_music"),
-		foodMusic = document.getElementById("food"), 
-		goMusic = document.getElementById("gameOver");
+        foodMusic = document.getElementById("food"),
+        goMusic = document.getElementById("gameOverM");
 
 var files = [mainMusic, foodMusic, goMusic];
 var counter = 0;
@@ -62,8 +62,12 @@ function gameInitialize() {
     startScreen = document.getElementById("startScreen");
     centerMenuPosition(startScreen);
     
-    difficulty = document.getElementById("difficulty");
+    difficulty = document.getElementById("easy");
     difficulty.addEventListener("click", gameStart);
+    
+    difficulty = document.getElementById("hard");
+    difficulty.addEventListener("click", gameStart2);
+    
     
     gameOverMenu = document.getElementById("gameOver");
     centerMenuPosition(gameOverMenu);
@@ -75,6 +79,12 @@ function gameInitialize() {
     scoreboard = document.getElementById("scoreboard");
     
     setState("START");
+    
+    imageSnake = new Image();
+    imageSnake.src = "images/segment.png" 
+    
+    imageFood = new Image();
+    imageFood.src = "https://pullquotesandexcerpts.files.wordpress.com/2013/11/silver-apple-logo.png?w=360"
 }
 
 function gameLoop() {
@@ -106,8 +116,16 @@ function gameStart() {
     foodInitialize();
     hideMenu(startScreen);
     setState("PLAY");
-    
 }
+
+function gameStart2() {
+    snakeInitialize();
+    foodInitialize();
+    hideMenu(startScreen);
+    setState("PLAY");
+    setInterval(gameLoop, 750/30);
+}
+
 
 /* --------------------------------------------------------------------------
  * Snake Functions
@@ -130,9 +148,11 @@ function snakeInitialize() {
 
 function snakeDraw() {
     for(var index = 0; index < snake.length; index++) {
-        context.fillStyle = "white";
-        context.fillRect(snake[index].x * snakeSize, snake[index].y * snakeSize, snakeSize, snakeSize);
+//        context.fillStyle = "white";
+//        context.fillRect(snake[index].x * snakeSize, snake[index].y * snakeSize, snakeSize, snakeSize);
+        context.drawImage(imageSnake, snake[index].x * snakeSize, snake[index].y * snakeSize, snakeSize, snakeSize);
     }
+    
 }
 
 function snakeUpdate() {
@@ -177,8 +197,10 @@ function foodInitialize() {
 }
 
 function foodDraw() {
-    context.fillStyle = "white";
-    context.fillRect(food.x * snakeSize, food.y * snakeSize, snakeSize, snakeSize);
+//    context.fillStyle = "white";
+//    context.fillRect(food.x * snakeSize, food.y * snakeSize, snakeSize, snakeSize);
+      context.drawImage(imageFood, food.x * snakeSize, food.y * snakeSize, snakeSize, snakeSize);
+
 }
 
 function setFoodPosition() {
@@ -230,7 +252,7 @@ function checkFoodCollisions(snakeHeadX, snakeHeadY) {
 
 function checkWallCollisions(snakeHeadX, snakeHeadY) {
     if(snakeHeadX * snakeSize >= screenWidth || snakeHeadX * snakeSize < 0 ||
-       snakeHeadY * snakeSize >= screenHeight || snakeHeadY * snakeSize) {
+       snakeHeadY * snakeSize >= screenHeight || snakeHeadY * snakeSize < 0) {
         setState("GAME OVER");     
     }
     }
@@ -270,6 +292,10 @@ function hideMenu(menu) {
 function showMenu(state) {
     if(state == "GAME OVER") {
         displayMenu(gameOverMenu);
+        goMusic.pause();
+        goMusic.currentime = 0;
+        goMusic.play();
+        
     }
     else if(state == "PLAY") {
         displayMenu(playHUD);
