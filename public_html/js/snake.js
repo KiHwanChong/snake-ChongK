@@ -84,7 +84,7 @@ function gameInitialize() {
     imageSnake.src = "images/segment.png" 
     
     imageFood = new Image();
-    imageFood.src = "https://pullquotesandexcerpts.files.wordpress.com/2013/11/silver-apple-logo.png?w=360"
+    imageFood.src = "http://img2.wikia.nocookie.net/__cb20140530025912/asphalt/images/c/cc/Apple_logo_black.svg.png"
 }
 
 function gameLoop() {
@@ -135,7 +135,7 @@ function gameStart2() {
 function snakeInitialize() {
     snake = [];
     snakeLength = 1;
-    snakeSize = 20;
+    snakeSize = 30;
     snakeDirection = "down";
     
     for(var index = snakeLength - 1; index >= 0; index--) {
@@ -148,8 +148,6 @@ function snakeInitialize() {
 
 function snakeDraw() {
     for(var index = 0; index < snake.length; index++) {
-//        context.fillStyle = "white";
-//        context.fillRect(snake[index].x * snakeSize, snake[index].y * snakeSize, snakeSize, snakeSize);
         context.drawImage(imageSnake, snake[index].x * snakeSize, snake[index].y * snakeSize, snakeSize, snakeSize);
     }
     
@@ -197,8 +195,6 @@ function foodInitialize() {
 }
 
 function foodDraw() {
-//    context.fillStyle = "white";
-//    context.fillRect(food.x * snakeSize, food.y * snakeSize, snakeSize, snakeSize);
       context.drawImage(imageFood, food.x * snakeSize, food.y * snakeSize, snakeSize, snakeSize);
 
 }
