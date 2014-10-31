@@ -15,32 +15,37 @@ body {
     position: absolute;
     visibility: hidden;
 }
-
+/*Same abosolute but no visibility*/
 #startScreen {
     position: absolute;
 }
 
+/*set up font*/
 h1,h2,h3,h4,h5,h6 {
     font-family: 'Permanent Marker', cursive;
     color: white;
     text-align: center;
 }
 
+/*font of title, adjust margin*/
 .title {
     font-size: 62px;
     margin-bottom: 0px;
     margin-top: 0px;
 }
 
+/*make a border */
 #restartButton,#easy,#hard {
     border: 2px solid white;
     border-radius: 10px;
 }
 
+/*green hover*/
 #restartButton:hover,#easy:hover,#hard:hover {
     background-color: #009900;
 }
 
+/*adjust margin of socreboard*/
 #scoreboard {
     margin: 0px;
 }

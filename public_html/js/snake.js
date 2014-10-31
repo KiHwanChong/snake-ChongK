@@ -60,8 +60,9 @@ function gameInitialize() {
     document.addEventListener("keydown", keyboardHandler);
     
     startScreen = document.getElementById("startScreen");
-    centerMenuPosition(startScreen);
+    centerMenuPosition(startScreen);        
     
+    //Set difficullty
     difficulty = document.getElementById("easy");
     difficulty.addEventListener("click", gameStart);
     
@@ -80,12 +81,13 @@ function gameInitialize() {
     
     setState("START");
     
+    //image of snake and food
     imageSnake = new Image();
     imageSnake.src = "images/segment.png" 
     
     imageFood = new Image();
-    imageFood.src = "http://img2.wikia.nocookie.net/__cb20140530025912/asphalt/images/c/cc/Apple_logo_black.svg.png"
-}
+    imageFood.src = "http://img2.wikia.nocookie.net/__cb20140530025912/asphalt/images/c/cc/Apple_logo_black.svg.png"   
+    }
 
 function gameLoop() {
     gameDraw();
@@ -111,11 +113,13 @@ function gameRestart() {
     
 }
 
+//difficulty function
 function gameStart() {
     snakeInitialize();
     foodInitialize();
     hideMenu(startScreen);
     setState("PLAY");
+
 }
 
 function gameStart2() {
@@ -123,7 +127,7 @@ function gameStart2() {
     foodInitialize();
     hideMenu(startScreen);
     setState("PLAY");
-    setInterval(gameLoop, 750/30);
+    setInterval(gameLoop, 1000/30);
 }
 
 
